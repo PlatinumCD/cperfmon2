@@ -26,7 +26,7 @@ static void plugin_write_frame_all(CpuOutput *self, const CpuUsageFrame *frame) 
 
     uint64_t ts = waggle_get_timestamp_ns();
     char meta[32];
-    snprintf(meta, sizeof(meta), "{\"si\":%d}", frame->sampling_interval);
+    snprintf(meta, sizeof(meta), "{\"si\": \"%" PRIu64 "\"}", frame->sampling_interval);
 
     for (int i = 0; i < 10; i++) {
         char topic[64];
@@ -47,7 +47,7 @@ static void plugin_write_frame_default(CpuOutput *self, const CpuUsageFrame *fra
 
     uint64_t ts = waggle_get_timestamp_ns();
     char meta[32];
-    snprintf(meta, sizeof(meta), "{\"si\":%d}", frame->sampling_interval);
+    snprintf(meta, sizeof(meta), "{\"si\": \"%" PRIu64 "\"}", frame->sampling_interval);
 
     for (int i = 0; i < 3; i++) {
         char topic[64];
