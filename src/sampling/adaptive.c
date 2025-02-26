@@ -54,9 +54,11 @@ void update_adaptive_params(CpuContext *ctx, AdaptiveParams *params) {
     float new_sigma = a_tilde * params->sigma_hat + (1.0f - a_tilde) * diff;
     float new_delta = a_tilde * params->delta_hat + (1.0f - a_tilde) * (diff * diff);
 
+/*
     float new_var = fmaxf(new_delta - (new_sigma * new_sigma), epsilon);
     float new_std = sqrtf(new_var);
     float confidence = 1.0f - fabsf(new_std - std) / (std + epsilon);
+*/
 
     // Update the PEWMA state.
     params->sigma_hat = new_sigma;
