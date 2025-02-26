@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 #include "waggle/plugin.h"
 #include "waggle/config.h"
 #include "waggle/timeutil.h"
