@@ -24,7 +24,6 @@ void update_adaptive_params(CpuContext *ctx, AdaptiveParams *params) {
 
     // Compute the absolute difference between current and previous value.
     float diff = fabsf(curr_system_load - prev_system_load);
-    printf("Load diff: %f\n", diff);
 
     // First-time initialization: set prev_x and default sample interval.
     if (first_time) {
@@ -32,8 +31,9 @@ void update_adaptive_params(CpuContext *ctx, AdaptiveParams *params) {
         ctx->sampleInterval = params->Tmin;
         params->sigma_hat = diff;
         params->delta_hat = diff * diff;
-        printf("First time initialization: sampleInterval = %f, sigma_hat = %f, delta_hat = %f\n\n\n",
+/*        printf("First time initialization: sampleInterval = %f, sigma_hat = %f, delta_hat = %f\n\n\n",
                ctx->sampleInterval, params->sigma_hat, params->delta_hat);
+*/
         return;
     }
 
@@ -77,6 +77,7 @@ void update_adaptive_params(CpuContext *ctx, AdaptiveParams *params) {
     if (ctx->sampleInterval > params->Tmax)
         ctx->sampleInterval = params->Tmax;
 
-    printf("Updated sigma_hat: %f, delta_hat: %f, sampleInterval: %f, confidence: %f\n\n\n",
+/*    printf("Updated sigma_hat: %f, delta_hat: %f, sampleInterval: %f, confidence: %f\n\n\n",
            params->sigma_hat, params->delta_hat, ctx->sampleInterval, confidence);
+*/
 }
