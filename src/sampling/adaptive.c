@@ -7,11 +7,11 @@
 
 void create_adaptive_params(AdaptiveParams *params) {
     params->Tmin = 0.2f;
-    params->Tmax = 1.20f;
-    params->gamma = 0.15f;   // scales the PEWMA output to get the sampling interval
-    params->alpha = 0.7f;
+    params->Tmax = 1.750f;
+    params->gamma = 0.03f;   // scales the PEWMA output to get the sampling interval
+    params->alpha = 0.3f;
     params->beta = 0.5f;
-    params->decay = 0.6f;
+    params->decay = 0.66f;
     params->sigma_hat = 0.0f;   // running mean of diff (PEWMA state)
     params->delta_hat = 0.0f;   // running mean of diff squared
 }
