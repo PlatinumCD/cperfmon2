@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <inttypes.h>
 #include <stdlib.h>
 #include "cpu/cpu_output.h"
 
@@ -10,7 +11,7 @@ typedef struct {
 // Separate write functions
 static void stdout_write_frame_all(CpuOutput *self, const CpuUsageFrame *frame) {
     (void)self;
-    printf("%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+    printf("%d,%d,%" PRIu64 ",%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
         frame->cpu_id, frame->timestep, frame->sampling_interval,
         frame->user, frame->nice, frame->system, frame->idle,
         frame->iowait, frame->irq, frame->softirq,
@@ -20,7 +21,7 @@ static void stdout_write_frame_all(CpuOutput *self, const CpuUsageFrame *frame) 
 
 static void stdout_write_frame_default(CpuOutput *self, const CpuUsageFrame *frame) {
     (void)self;
-    printf("%d,%d,%d,%d,%d,%d\n",
+    printf("%d,%d,%" PRIu64 ",%d,%d,%d\n",
         frame->cpu_id, frame->timestep, frame->sampling_interval,
         frame->user, frame->system, frame->idle
     );
