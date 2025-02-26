@@ -41,7 +41,7 @@ void sample_cpu_data(CpuContext *ctx, int32_t timestep) {
                 line,
                 cpu_id,
                 timestep,
-                (int32_t)(ctx->sampleInterval * 1e6),
+                (uint64_t)(ctx->sampleInterval * 1e6),
                 &ctx->prev_raw[cpu_line_idx]
             );
             ctx->curr_usage[cpu_line_idx] = usage;

@@ -10,7 +10,7 @@
 CpuUsageFrame parse_cpu_frame(const char *line,
                               int8_t cpu_id,
                               int32_t timestep,
-                              int32_t sampling_interval,
+                              uint64_t sampling_interval,
                               RawCpuFrame *prev_raw)
 {
     unsigned long long u, n, s, i, io, ir, so, st, g, gn;
