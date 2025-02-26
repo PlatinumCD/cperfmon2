@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include <inttypes.h>
 #include "waggle/plugin.h"
 #include "waggle/config.h"
 #include "waggle/timeutil.h"
-
 #include "cpu/cpu_output.h"
 
 typedef struct {
@@ -14,18 +11,17 @@ typedef struct {
     void (*write_impl)(CpuOutput *self, const CpuUsageFrame *frame);
 } PluginOutputData;
 
-// Publish all fields
 static void plugin_write_frame_all(CpuOutput *self, const CpuUsageFrame *frame) {
     PluginOutputData *d = (PluginOutputData *)self->data;
     if (!d->p) return;
 
     const char *fields[] = {
-        "user","nice","system","idle","iowait",
-        "irq","softirq","steal","guest","guest_nice"
+        "user", "nice", "system", "idle", "iowait",
+        "irq", "softirq", "steal", "guest", "guest_nice"
     };
     int8_t values[] = {
-        frame->user,frame->nice,frame->system,frame->idle,frame->iowait,
-        frame->irq,frame->softirq,frame->steal,frame->guest,frame->guest_nice
+        frame->user, frame->nice, frame->system, frame->idle, frame->iowait,
+        frame->irq, frame->softirq, frame->steal, frame->guest, frame->guest_nice
     };
 
     uint64_t ts = waggle_get_timestamp_ns();
@@ -42,12 +38,11 @@ static void plugin_write_frame_all(CpuOutput *self, const CpuUsageFrame *frame) 
     }
 }
 
-// Publish only user, system, idle
 static void plugin_write_frame_default(CpuOutput *self, const CpuUsageFrame *frame) {
     PluginOutputData *d = (PluginOutputData *)self->data;
     if (!d->p) return;
 
-    const char *fields[] = {"user","system","idle"};
+    const char *fields[] = {"user", "system", "idle"};
     int8_t values[] = {frame->user, frame->system, frame->idle};
 
     uint64_t ts = waggle_get_timestamp_ns();
@@ -64,16 +59,15 @@ static void plugin_write_frame_default(CpuOutput *self, const CpuUsageFrame *fra
     }
 }
 
-// Regular plugin callbacks
 static void plugin_init(CpuOutput *self) {
     PluginOutputData *d = (PluginOutputData *)self->data;
 
     const char *user = getenv("WAGGLE_PLUGIN_USERNAME") ? getenv("WAGGLE_PLUGIN_USERNAME") : "plugin";
     const char *pass = getenv("WAGGLE_PLUGIN_PASSWORD") ? getenv("WAGGLE_PLUGIN_PASSWORD") : "plugin";
-    const char *host = getenv("WAGGLE_PLUGIN_HOST")     ? getenv("WAGGLE_PLUGIN_HOST")     : "rabbitmq";
-    int port         = getenv("WAGGLE_PLUGIN_PORT")     ? atoi(getenv("WAGGLE_PLUGIN_PORT")) : 5672;
-    const char *app  = getenv("WAGGLE_APP_ID")          ? getenv("WAGGLE_APP_ID")          : "";
-
+    const char *host = getenv("WAGGLE_PLUGIN_HOST") ? getenv("WAGGLE_PLUGIN_HOST") : "rabbitmq";
+    int port = getenv("WAGGLE_PLUGIN_PORT") ? atoi(getenv("WAGGLE_PLUGIN_PORT")) : 5672;
+    const char *app = getenv("WAGGLE_APP_ID") ? getenv("WAGGLE_APP_ID") : "";
+    
     PluginConfig *cfg = plugin_config_new(user, pass, host, port, app);
     if (!cfg) {
         fprintf(stderr, "Failed to create PluginConfig.\n");
@@ -85,7 +79,6 @@ static void plugin_init(CpuOutput *self) {
         exit(EXIT_FAILURE);
     }
 
-    // Choose which write function to use based on an env var
     if (d->enable_all) {
         d->write_impl = plugin_write_frame_all;
     } else {
@@ -95,7 +88,6 @@ static void plugin_init(CpuOutput *self) {
 }
 
 static void plugin_flush(CpuOutput *self) {
-    // no-op
     (void)self;
 }
 
@@ -118,7 +110,7 @@ CpuOutput *create_plugin_output(int enable_all) {
     data->write_impl = NULL;
 
     out->init        = plugin_init;
-    out->write_frame = NULL; // chosen in plugin_init
+    out->write_frame = NULL;  // Set in plugin_init.
     out->flush       = plugin_flush;
     out->close       = plugin_close;
     out->data        = data;

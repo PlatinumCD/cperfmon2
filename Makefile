@@ -1,11 +1,11 @@
 # === Makefile ===
 
 CC      = gcc
-CFLAGS  = -Wall -Wextra -Iinclude
-LDFLAGS = -lm
+CFLAGS  = -Wall -Wextra -Iinclude -O3
+LDFLAGS = -lm -lwaggle
 
 # Name of the final executable
-TARGET  = cpu_monitor
+TARGET  = perfmon
 
 # Source files
 SRCS = main.c \

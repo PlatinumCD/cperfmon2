@@ -43,7 +43,7 @@ void create_cpu_context(CpuContext *ctx) {
 
     // Decide output type using an environment variable (example)
     if (getenv("PERFMON_PUBLISH_DATA")) {
-//        ctx.output = create_plugin_output(/*unused in init*/ 0);
+        ctx->output = create_plugin_output(enable_all);
     } else {
         ctx->output = create_stdout_output(enable_all);
     }
