@@ -11,7 +11,7 @@ void create_adaptive_params(AdaptiveParams *params) {
     params->gamma = 0.03f;   // scales the PEWMA output to get the sampling interval
     params->alpha = 0.52f;
     params->beta = 0.5f;
-    params->decay = 0.66f;
+    params->decay = 0.4f;
     params->sigma_hat = 0.0f;   // running mean of diff (PEWMA state)
     params->delta_hat = 0.0f;   // running mean of diff squared
 }
