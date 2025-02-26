@@ -13,8 +13,8 @@ SRCS = main.c \
        src/cpu/cpu_context.c \
        src/cpu/cpu_frame.c \
        src/cpu/outputs/cpu_output_stdout.c \
+       src/cpu/outputs/cpu_output_plugin.c \
 	   src/sampling/adaptive.c
-#       src/cpu/outputs/cpu_output_plugin.c \
 
 # Object files (turn each .c into a .o)
 OBJS = $(SRCS:.c=.o)
