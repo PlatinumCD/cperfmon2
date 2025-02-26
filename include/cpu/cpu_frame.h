@@ -1,7 +1,6 @@
 #ifndef CPU_FRAME_H
 #define CPU_FRAME_H
 
-#include <cstdint>
 #include <stdint.h>
 
 /**
@@ -48,7 +47,7 @@ typedef struct _CpuUsageFrame {
 CpuUsageFrame parse_cpu_frame(const char *line,
                               int8_t cpu_id,
                               int32_t timestep,
-                              int32_t sampling_interval,
+                              uint64_t sampling_interval,
                               RawCpuFrame *prev_raw);
 
 #endif // CPU_FRAME_H
