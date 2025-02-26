@@ -15,6 +15,6 @@ typedef struct CpuOutput {
 CpuOutput *create_stdout_output(int enable_all);
 
 // (Optional) plugin output
-// CpuOutput *create_plugin_output(int enable_all);
+CpuOutput *create_plugin_output(int enable_all);
 
 #endif // CPU_OUTPUT_H
